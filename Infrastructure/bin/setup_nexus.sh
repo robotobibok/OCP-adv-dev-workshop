@@ -37,7 +37,7 @@ oc patch dc nexus3 --patch='{ "spec": { "strategy": { "type": "Recreate" }}}' -n
 oc set resources dc nexus3 --limits=memory=2Gi --requests=memory=1Gi -n ${GUID}-nexus
 oc create -f ./Infrastructure/templates/nexus/pvc.yaml -n $GUID-nexus
 oc set volume dc/nexus3 --add --overwrite --name=nexus3-volume-1 --mount-path=/nexus-data/ --type persistentVolumeClaim --claim-name=nexus-pvc -n ${GUID}-nexus
-oc patch dc nexus3 -p '{"spec":{"template":{"spec":{"containers":[{"name":"nexus3","ports":[{"containerPort": 5000,"protocol":"TCP","name":"docker"}]}]}}}}' -n ${GUID}-nexus
+oc patch dc nexus3 --patch='{"spec":{"template":{"spec":{"containers":[{"name":"nexus3","ports":[{"containerPort": 5000,"protocol":"TCP","name":"docker"}]}]}}}}' -n ${GUID}-nexus
 oc set probe dc/nexus3 --liveness --failure-threshold 3 --initial-delay-seconds 60 -- echo ok -n ${GUID}-nexus
 oc set probe dc/nexus3 --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://:8081/repository/maven-public/ -n ${GUID}-nexus
 oc rollout resume dc nexus3 -n ${GUID}-nexus
