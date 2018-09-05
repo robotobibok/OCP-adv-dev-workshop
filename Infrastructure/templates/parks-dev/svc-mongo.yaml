@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Template
 metadata:
   creationTimestamp: null
-  name: mongo_db_services.yaml
+  name: mongo_db_services
 objects:
 - kind: Service
   apiVersion: v1
