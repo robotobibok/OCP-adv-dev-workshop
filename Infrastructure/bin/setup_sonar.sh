@@ -20,7 +20,7 @@ oc new-app --docker-image=wkulhanek/sonarqube:6.7.4 --env=SONARQUBE_JDBC_USERNAM
 
 oc rollout pause dc sonarqube -n $GUID-sonarqube
 oc expose service sonarqube -n $GUID-sonarqube
-oc create -f ./Infrastructure/templates/cpd-sonarqube/sonarqube_pvc.yaml -n $GUID-sonarqube
+oc create -f ./Infrastructure/templates/sonarqube/pvc.yaml -n $GUID-sonarqube
 oc set volume dc/sonarqube --add --overwrite --name=sonarqube-volume-1 --mount-path=/opt/sonarqube/data/ --type persistentVolumeClaim --claim-name=sonarqube-pvc -n $GUID-sonarqube
 oc set resources dc/sonarqube --limits=memory=3Gi,cpu=2 --requests=memory=2Gi,cpu=1 -n $GUID-sonarqube
 oc patch dc sonarqube --patch='{ "spec": { "strategy": { "type": "Recreate" }}}' -n $GUID-sonarqube
