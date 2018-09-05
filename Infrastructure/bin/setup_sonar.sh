@@ -27,3 +27,6 @@ oc patch dc sonarqube --patch='{ "spec": { "strategy": { "type": "Recreate" }}}'
 oc set probe dc/sonarqube -n $GUID-sonarqube --liveness --failure-threshold 3 --initial-delay-seconds 40 -- echo ok
 oc set probe dc/sonarqube -n $GUID-sonarqube --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://:9000/about
 oc rollout resume dc sonarqube -n $GUID-sonarqube
+
+oc policy add-role-to-user edit system:serviceaccount:gpte-jenkins:jenkins -n ${GUID}-sonarqube
+oc policy add-role-to-user admin system:serviceaccount:gpte-jenkins:jenkins -n ${GUID}-sonarqube
