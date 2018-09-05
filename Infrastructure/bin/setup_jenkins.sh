@@ -25,5 +25,3 @@ echo "Setting up Jenkins in project ${GUID}-jenkins from Git Repo ${REPO} for Cl
 # The build configurations need to have two environment variables to be passed to the Pipeline:
 # * GUID: the GUID used in all the projects
 # * CLUSTER: the base url of the cluster used (e.g. na39.openshift.opentlc.com)
-
-# To be Implemented by Student
