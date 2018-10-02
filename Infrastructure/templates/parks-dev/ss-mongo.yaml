@@ -1,5 +1,5 @@
 kind: StatefulSet
-apiVersion: apps/v1
+apiVersion: v1
 metadata:
   name: "mongodb"
 spec:
