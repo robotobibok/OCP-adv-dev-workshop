@@ -1,0 +1,12 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "nationalparks-pipeline"
+spec:
+  source:
+    git:
+      uri: "https://github.com/robotobibok/OCP-adv-dev-workshop.git"
+      ref: "master"
+  strategy:
+    jenkinsPipelineStrategy:
+       jenkinsfilePath: Nationalparks/Jenkinsfile

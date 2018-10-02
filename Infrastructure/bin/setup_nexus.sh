@@ -50,8 +50,8 @@ while : ; do
   #oc get pod -n ${GUID}-nexus | grep -v deploy | grep "1/1"
   curl -i http://$(oc get route nexus3 --template='{{ .spec.host }}' -n ${GUID}-nexus) 2>&1 /dev/null | grep 'HTTP/1.1 200 OK' > /dev/null
   [[ "$?" == "1" ]] || break
-  echo "... not quite yet. Sleeping 20 seconds."
-  sleep 20
+  echo "... not read. Sleep 10s and retry."
+  sleep 10
 done
 
 curl -o setup_nexus3.sh -s https://raw.githubusercontent.com/wkulhanek/ocp_advanced_development_resources/master/nexus/setup_nexus3.sh
