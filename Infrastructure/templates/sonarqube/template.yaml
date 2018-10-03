@@ -272,4 +272,4 @@ objects:
     wildcardPolicy: None
 parameters:
 - description: ${GUID}
-name: ${GUID}
+  name: ${GUID}
