@@ -28,8 +28,8 @@ echo "Setting up Jenkins in project ${GUID}-jenkins from Git Repo ${REPO} for Cl
 oc new-app jenkins-persistent --param ENABLE_OAUTH=true --param MEMORY_LIMIT=4Gi --param VOLUME_CAPACITY=4Gi -n ${GUID}-jenkins
 
 
-oc policy add-role-to-user edit system:serviceaccount:cpd-jenkins:jenkins -n ${GUID}-parks-dev
-oc policy add-role-to-user edit system:serviceaccount:cpd-jenkins:jenkins -n ${GUID}-parks-prod
+oc policy add-role-to-user edit system:serviceaccount:gpte-jenkins:jenkins -n ${GUID}-parks-dev
+oc policy add-role-to-user edit system:serviceaccount:gpte-jenkins:jenkins -n ${GUID}-parks-prod
 
 oc new-app jenkins-persistent --param ENABLE_OAUTH=true --param MEMORY_LIMIT=4Gi --param VOLUME_CAPACITY=4Gi -n ${GUID}-jenkins
 #oc rollout pause dc jenkins -n ${GUID}-jenkins
