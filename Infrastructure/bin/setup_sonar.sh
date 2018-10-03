@@ -18,7 +18,7 @@ echo "Setting up Sonarqube in project $GUID-sonarqube"
 oc new-app --template=postgresql-persistent --param POSTGRESQL_USER=sonar --param POSTGRESQL_PASSWORD=sonar --param POSTGRESQL_DATABASE=sonar --param VOLUME_CAPACITY=4Gi --labels=app=sonarqube_db -n $GUID-sonarqube
 oc new-app --docker-image=wkulhanek/sonarqube:6.7.4 --env=SONARQUBE_JDBC_USERNAME=sonar --env=SONARQUBE_JDBC_PASSWORD=sonar --env=SONARQUBE_JDBC_URL=jdbc:postgresql://postgresql/sonar --labels=app=sonarqube -n $GUID-sonarqube
 oc rollout pause dc sonarqube -n $GUID-sonarqube
-wait 140
+sleep 140
 oc expose service sonarqube -n $GUID-sonarqube
 oc create -f Infrastructure/templates/sonarqube/pvc.yaml -n $GUID-sonarqube
 oc set volume dc/sonarqube --add --overwrite --name=sonarqube-volume-1 --mount-path=/opt/sonarqube/data/ --type persistentVolumeClaim --claim-name=sonarqube-pvc -n $GUID-sonarqube
