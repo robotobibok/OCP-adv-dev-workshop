@@ -28,6 +28,6 @@ echo "Setting up Sonarqube in project $GUID-sonarqube"
 #oc set probe dc/sonarqube -n $GUID-sonarqube --liveness --failure-threshold 3 --initial-delay-seconds 40 -- echo ok
 #oc set probe dc/sonarqube -n $GUID-sonarqube --readiness --failure-threshold 3 --initial-delay-seconds 60 --get-url=http://:9000/about
 #oc rollout resume dc sonarqube -n $GUID-sonarqube
-oc process -f Infrastructure/templates/sonarqube/template.yaml -n ${GUID}-sonarqube -p GUID=${GUID} | oc create -n ${GUID}-sonarqube -f -
+oc process -f Infrastructure/templates/sonarqube/template.yaml -n ${GUID}-sonarqube | oc create -n ${GUID}-sonarqube -f -
 oc policy add-role-to-user edit system:serviceaccount:gpte-jenkins:jenkins -n ${GUID}-sonarqube
 oc policy add-role-to-user admin system:serviceaccount:gpte-jenkins:jenkins -n ${GUID}-sonarqube
