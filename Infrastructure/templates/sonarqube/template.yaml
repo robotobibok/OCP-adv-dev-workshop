@@ -271,5 +271,5 @@ objects:
       weight: 100
     wildcardPolicy: None
 parameters:
-- description: GUID
-name: GUID
+- description: ${GUID}
+name: ${GUID}
