@@ -46,8 +46,8 @@ while : ; do
 done
 oc tag maven-slave-pod:latest maven-slave-pod:v3.9 -n ${GUID}-jenkins
 oc create -f ./Infrastructure/templates/jenkins/mlbparks-pipeline.yaml -n ${GUID}-jenkins
-#oc create -f ./Infrastructure/templates/jenkins/nationalparks-pipeline.yaml -n ${GUID}-jenkins
-#oc create -f ./Infrastructure/templates/jenkins/parksmap-pipeline.yaml -n ${GUID}-jenkins
+oc create -f ./Infrastructure/templates/jenkins/nationalparks-pipeline.yaml -n ${GUID}-jenkins
+oc create -f ./Infrastructure/templates/jenkins/parksmap-pipeline.yaml -n ${GUID}-jenkins
 oc set env bc/mlbparks-pipeline GUID=${GUID} REPO=${REPO} CLUSTER=${CLUSTER} -n ${GUID}-jenkins
-#oc set env bc/nationalparks-pipeline GUID=${GUID} REPO=${REPO} CLUSTER=${CLUSTER} -n ${GUID}-jenkins
-#oc set env bc/parksmap-pipeline GUID=${GUID} REPO=${REPO} CLUSTER=${CLUSTER} -n ${GUID}-jenkins
+oc set env bc/nationalparks-pipeline GUID=${GUID} REPO=${REPO} CLUSTER=${CLUSTER} -n ${GUID}-jenkins
+oc set env bc/parksmap-pipeline GUID=${GUID} REPO=${REPO} CLUSTER=${CLUSTER} -n ${GUID}-jenkins
