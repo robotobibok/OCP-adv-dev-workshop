@@ -32,9 +32,10 @@ oc policy add-role-to-user edit system:serviceaccount:gpte-jenkins:jenkins -n ${
 oc policy add-role-to-user edit system:serviceaccount:gpte-jenkins:jenkins -n ${GUID}-parks-prod
 
 oc new-app jenkins-persistent --param ENABLE_OAUTH=true --param MEMORY_LIMIT=4Gi --param VOLUME_CAPACITY=4Gi -n ${GUID}-jenkins
-#oc rollout pause dc jenkins -n ${GUID}-jenkins
+oc rollout pause dc jenkins -n ${GUID}-jenkins
 #oc set probe dc jenkins --readiness --initial-delay-seconds=460 --timeout-seconds=880 -n ${GUID}-jenkins
-#oc rollout resume dc jenkins -n ${GUID}-jenkins
+oc set resources dc jenkins --limits=memory=4Gi,cpu=4 --requests=memory=2Gi,cpu=3 -n ${GUID}-jenkins
+oc rollout resume dc jenkins -n ${GUID}-jenkins
 oc new-build --name=maven-slave-pod -D $'FROM openshift/jenkins-slave-maven-centos7:v3.9\nUSER root\nRUN yum -y install skopeo apb && yum clean all\nUSER 1001' -n ${GUID}-jenkins
 sleep 40
 while : ; do
